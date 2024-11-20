@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "ESta es mi primer api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch . js index.js"
+  },
+  "author": "Jesús Antonio Zúñiga Arce <jzuniga@ubacs.mx>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
