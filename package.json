@@ -9,8 +9,10 @@
   "author": "Jesús Antonio Zúñiga Arce <jzuniga@ubacs.mx>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.4"
   },
   "devDependencies": {
