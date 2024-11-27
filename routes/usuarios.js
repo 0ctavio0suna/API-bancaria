@@ -2,6 +2,7 @@ const { Router } = require('express');
 const connect = require('../db');
 const bcrypt = require('bcrypt');
 const router = Router();
+const authVerify = require('../middleware/authVerify');
 
 router.get('/users', async (req, res) =>{
     let db;
@@ -57,12 +58,12 @@ router.get('/users/:email', async (req, res) => {
     }
 });
 
-router.delete('/users/:email', async (req, res) => {
+router.delete('/users/:email', authVerify, async (req, res) => {
     const email = req.params.email;
+    console.log(req.email_usuario);
     let db;
     try {
         db = await connect();
-        console.log(email);
         const query = 'DELETE FROM usuarios WHERE email = ?';
         const [rows] = await db.execute(query, [email]);
         if(rows.affectedRows === 0) {
