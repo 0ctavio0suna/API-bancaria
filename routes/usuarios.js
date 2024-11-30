@@ -1,19 +1,18 @@
 const { Router } = require('express');
-const connect = require('../db');
+const connect = require('../config/db');
 const bcrypt = require('bcrypt');
 const router = Router();
 const authVerify = require('../middleware/authVerify');
 
-router.get('/users', async (req, res) =>{
+router.get('/users', authVerify, async (req, res) =>{
     let db;
     try {
         db = await connect();
         const query = 'SELECT * FROM usuarios';
         const [row] = await db.execute(query);
         console.log(row);
-        res.json({
-            'status': 200,
-            'users': row
+        res.status(200).json({
+            'data': row
         });
     } catch(err) {
         console.log(err);
@@ -30,17 +29,18 @@ router.post('/users', async(req, res) => {
         console.log(hashPassword);
         const query = `INSERT INTO usuarios(nombre, email, password) VALUES('${nombre}', '${email}', '${hashPassword}')`;
         const [row] = await db.execute(query);
-        console.log(row);
-        res.json({
-            'status': 200,
-            'users': row
+        res.status(201).json({
+            'data': row
         });
     } catch(err) {
         console.log(err);
+        res.status(500).json({
+            'msg': 'Ocurrió un error al intentar almacenar los datos del usuario'
+        })
     }
 });
 
-router.get('/users/:email', async (req, res) => {
+router.get('/users/:email', authVerify, async (req, res) => {
     const email = req.params.email;
     let db;
     try {
@@ -49,12 +49,14 @@ router.get('/users/:email', async (req, res) => {
         const query = 'SELECT * FROM usuarios WHERE email = ?';
         const [row] = await db.execute(query, [email]);
         console.log(row);
-        res.json({
-            'status': 200,
-            'users': row
+        res.status(200).json({
+            'data': row
         });
     } catch(err) {
         console.log(err);
+        res.status(500).json({
+            'msg': 'Ocurrió un error al intentar obtener los datos del usuario'
+        })
     }
 });
 
@@ -83,7 +85,7 @@ router.delete('/users/:email', authVerify, async (req, res) => {
     }
 });
 
-router.put('/users/:email', async (req, res) => {
+router.put('/users/:email', authVerify, async (req, res) => {
     const email = req.params.email;
     const {nombre} = req.body;
 

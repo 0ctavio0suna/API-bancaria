@@ -2,11 +2,11 @@ const mysql = require('mysql2/promise');
 
 async function connect() {
     try {
-        const HOST = '178.128.158.184';
-        const PORT = 3306;
-        const USER = 'root';
-        const PASSWORD = 't00r';
-        const DATABASE = 'BANCA_MOVIL';
+        const HOST = process.env.DB_HOST;
+        const PORT = process.env.DB_PORT;
+        const USER = process.env.DB_USER;
+        const PASSWORD = process.env.DB_PASSWORD;
+        const DATABASE = process.env.DB_NAME;
 
         const conn = await mysql.createConnection({
             'host': HOST,

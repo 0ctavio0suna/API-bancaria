@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const connect = require('../db');
+const connect = require('../config/db');
 const bcrypt = require('bcrypt');
 const router = Router();
 const jwt = require('jsonwebtoken');
