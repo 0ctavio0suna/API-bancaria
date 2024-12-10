@@ -24,9 +24,9 @@ async function insertUser() {
     const name = 'Carlos';
     const lastName = 'Hernández';
     const email = 'carlos.hernandez@example.com';
-    const password = 'mysecurepassword'; // contraseña en texto claro
+    const password = 'mysecurepassword'; 
 
-    // Cifrar la contraseña
+    
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
