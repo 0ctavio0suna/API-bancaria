@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const connect = require('../config/db'); // Asegúrate de que el archivo config/db.js esté configurado para la conexión a la base de datos
+const connect = require('../config/db'); 
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
