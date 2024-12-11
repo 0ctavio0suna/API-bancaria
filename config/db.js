@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-
+require('dotenv').config()
 async function connect() {
     try {
         const HOST = process.env.DB_HOST;
@@ -13,7 +13,7 @@ async function connect() {
             'port': PORT,
             'user': USER,
             'password': PASSWORD,
-            'database': DATABASE
+            'database': DATABASE,
         });
         console.log('Conexión creada');
         return conn;
